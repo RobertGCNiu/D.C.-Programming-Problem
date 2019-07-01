@@ -1,0 +1,97 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: DCPrecoding.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: REFDCprecode.bib
+Repeated entry---line 1687 of file REFDCprecode.bib
+ : @article{Jiang2018
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1729 of file REFDCprecode.bib
+ : @article{Jiang2018
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1769 of file REFDCprecode.bib
+ : @article{sun2015beam
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1957 of file REFDCprecode.bib
+ : @article{el2014spatially
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2231 of file REFDCprecode.bib
+ : @article{sohrabi2016hybrid
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2253 of file REFDCprecode.bib
+ : @book{rappaport2014millimeter
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2353 of file REFDCprecode.bib
+ : @article{alkhateeb2015limited
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2483 of file REFDCprecode.bib
+ : @article{han2014reference
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2873 of file REFDCprecode.bib
+ : @misc{cvx
+ :          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3221 of file REFDCprecode.bib
+ : @article{han2014reference
+ :                          ,
+I'm skipping whatever remains of this entry
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 11 entries,
+            4087 wiz_defined-function locations,
+            891 strings with 9208 characters,
+and the built_in function-call counts, 9962 in all, are:
+= -- 828
+> -- 241
+< -- 108
++ -- 140
+- -- 37
+* -- 498
+:= -- 1445
+add.period$ -- 22
+call.type$ -- 11
+change.case$ -- 10
+chr.to.int$ -- 246
+cite$ -- 11
+duplicate$ -- 674
+empty$ -- 706
+format.name$ -- 48
+if$ -- 2316
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 109
+newline$ -- 56
+num.names$ -- 11
+pop$ -- 221
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 767
+stack$ -- 0
+substring$ -- 584
+swap$ -- 624
+text.length$ -- 26
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 11
+warning$ -- 0
+while$ -- 45
+width$ -- 13
+write$ -- 135
+(There were 10 error messages)

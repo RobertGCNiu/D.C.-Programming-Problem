@@ -6,7 +6,7 @@
 %     0.11, 0.31, 0.0099, 0.0634];
 clear;clc
  M = 4;
- rho = db2pow(-10);
+ rho = db2pow(10);
  K = 2;
  m_k = M/K;
  sigma = 1/rho;
@@ -34,28 +34,22 @@ r_all = 0;
     
 
 %p_initial_v = [0.9120; 0.9514; 0.3460; 0.2902];
-p_initial_v = rand(m_k,1);
-b = 1j*rand(m_k,1);
-p_initial = p_initial_v * p_initial_v' + (b*b');  
+p_initial_v = ones(m_k,1);
+b = rand(m_k,1);
+p_initial = p_initial_v * p_initial_v' +1j * (b*b');  
 t_old = 0;
 r_old = 0;
 %Fbb = zeros(m_k,m_k*M);
 iter = 0;
 for k = 1:M
-%     if u ==1 || u==2
-%     Fbb(:, (u-1)*m_k+1:u*m_k) =  Fbb_initial(1:2,u)*Fbb_initial(1:2,u)';
-%     elseif u ==3||u==4 
-%      Fbb(:, (u-1)*m_k+1:u*m_k) =  Fbb_initial(3:4,u)*Fbb_initial(3:4,u)';
-%     end
      Fbb(:, (k-1)*m_k+1:k*m_k) =p_initial;
 end
 
 
 conver = 100;
 
-max_value_dif = 100;
+
 while(abs(conver)>0.1)
-    r = 0;
     iter = iter + 1;
  for u = 1:M
 p_initial = Fbb(:, (u-1)*m_k+1:u*m_k);
@@ -71,7 +65,8 @@ f_p = 0;
  for i = 1 : M
          H_f = 0;
          H_g = 0;
-    for k = 1:K
+         k=1;
+   % for k = 1:K
          for j = (k-1)*m_k+1:k*m_k
              if j == u
                  H_f = H_f +  H(i,1+(k-1)*m_k : k*m_k) * p * H(i,1+(k-1)*m_k : k*m_k)';
@@ -82,17 +77,18 @@ f_p = 0;
                  H_g = H_g + real(H(i,1+(k-1)*m_k : k*m_k) * Fbb(:, (j-1)*m_k+1:j*m_k)  * H(i,1+(k-1)*m_k : k*m_k)');
              end
          end
-     end
+    % end
      f_p  = f_p +  log(sigma + H_f)/log(2);   % f(p)  
      g_p  = g_p +  log(sigma + H_g)/log(2);  % g(p)   
  end
-    gra_g = g_block(H, Fbb,u,sigma);   % gradient of g
+    gra_g = g(H, Fbb,u,sigma,M);   % gradient of g
     t= f_p - g_p- real(trace(gra_g'*(p-p_initial)));
     maximize(t)
     subject to
     p>=0;
     if u == 1 || u == 2 
-    norm(Frf(:,1:m_k)*p*Frf(:,1:m_k)')<=1;
+ %norm(Frf*p*Frf')<=1;
+   norm(Frf(:,1:m_k)*p*Frf(:,1:m_k)')<=1;
     elseif u ==4 || u == 3
     norm(Frf(:,m_k+1:end)*p*Frf(:,m_k+1:end)')<=1;
     end
@@ -113,6 +109,7 @@ f_p = 0;
 %                 H(i,1+(k-1)*m_k : k*m_k) * p_0 *H(i,1+(k-1)*m_k : k*m_k)' + (1-2^ri)*(He + sigma) >= 0;
 %             end 
 cvx_end
+
 p_initial = p;
 Fbb(:, (u-1)*m_k+1:u*m_k) = p;
 max_value_dif = t-t_old;

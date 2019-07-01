@@ -1,4 +1,4 @@
-function [g_gradient] = g(H,Fbb,u,sigma,M,w)
+function [g_gradient] = g(H,Fbb,u,sigma,M)
 
 
 
@@ -13,7 +13,7 @@ for i = 1 : M
         end
     end
     if i~=u
-    g_gradient = g_gradient + w(i)*real(H(i,:)' * H(i,:))/log(2)/(sigma+H_d);
+    g_gradient = g_gradient + real(H(i,:)' * H(i,:))/log(2)/(sigma+H_d);
     end
 end
 

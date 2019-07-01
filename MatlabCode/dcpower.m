@@ -2,7 +2,7 @@ function p =  dcpower(H, M, p_all,sigma )
 
 w = ones(M,1);
 p_max = ones(M,1);
-ri = 0;
+ri = 5;
 
 p_initial = p_max;
 t_old = 0;
