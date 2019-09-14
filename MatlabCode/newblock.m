@@ -4,8 +4,9 @@ clear;clc;
 %     0.02, 0.3018, 0.08, 0.54; 
 %     0.0129, 0.05, 0.4266, 0.1007; 
 %     0.11, 0.31, 0.0099, 0.0634];
- M = 16;
+ M = 8;
  K = 2;
+ %sigma_0 = 0.001;
  m_k = M/K
  R_all=[];
  R_opt_all=[];
@@ -21,8 +22,9 @@ t_all = [];
 % a_RX =data.a_RX;
 % H_c = data.H_c;
 %Fbb_v = data.Fbb;
-at_num =6;
-rt_num =3;
+at_num =8;
+rt_num =2;
+R_dc = [];
 for iter_realization = 1:ITER
 %     data = load('block_2.mat');
 %     H_c = data.H_c;
@@ -41,9 +43,12 @@ for iter_realization = 1:ITER
         Channel(:,:)= H_c(u,:,:);
         H(u,:)=Wrf(:,u)'*Channel*Frf ;    % Effective channels
     end
- for rho = -10:5:30
-   sigma =  1/db2pow(rho);
+ for SNR_dB = -15:5:30
+     
+
+   %sigma =  1/db2pow(rho);
    
+
    
 
 %p_initial_v = [0.9120; 0.9514; 0.3460; 0.2902];
@@ -63,10 +68,16 @@ end
    for u = 1:M
         p_opt(:,u) = p_opt(:,u)/norm(Frf*p_opt(:,u));
    end
-
-
-R_opt_i =  RGH(H,p_opt,1/sigma);
-
+   
+   rho=db2pow(SNR_dB);
+  sigma = 1/rho;
+     
+   Heff_p = abs(H * p_opt).^2;
+   [p_dc,~] =  dcpower(Heff_p, M, M,sigma);
+   
+R_opt_i =  RGH(H,p_opt, rho);
+ [R_each_user, ~] = PGH(Heff_p,p_dc,sigma);
+ R_dc = [R_dc R_each_user];
 %R_opt_all =[R_opt_all,log2(R_opt_i(1,1)),log2(R_opt_i(2,2))]; 
 
 r_p_opt_all =[r_p_opt_all R_opt_i];
@@ -126,40 +137,53 @@ variable p(m_k,m_k) hermitian
     maximize(t)
     subject to
    p==semidefinite(m_k);      
-%     for i = 1:M
-%         if i == u
-%         all = all + norm(Frf*p*Frf');
-%         else 
-%             all = all + norm(Frf*Fbb(:, (i-1)*M+1:i*M)*Frf');
-%         end
-%     end
-%     all<=M;
- %norm(Frf*p*Frf')<=1;
-    if u <=m_k
-  norm(Frf(:,1:m_k)*p*Frf(:,1:m_k)')<=1;
-   elseif u>m_k
-   norm(Frf(:,m_k+1:end)*p*Frf(:,m_k+1:end)')<=1;
+   for k = 1:K
+    for i =(k-1)*m_k+1:k*m_k
+        if u<=m_k
+        if i == u
+        all = all + norm(Frf(:,1:m_k)*p*Frf(:,1:m_k)');
+        else 
+            all = all + norm(Frf(:,1:m_k)*Fbb(:, (i-1)*m_k+1:i*m_k)*Frf(:,1:m_k)');
+        end
+        end
+        if u>m_k
+        if i == u
+        all = all + norm(Frf(:,m_k+1:end)*p*Frf(:,m_k+1:end)');
+        else 
+            all = all + norm(Frf(:,m_k+1:end)*Fbb(:, (i-1)*m_k+1:i*m_k)*Frf(:,m_k+1:end)');
+        end
+        end
+    end
    end
- %if t_old>=2*ri
-%             for i = u
-%                 He = 0;
-%                 for j = 1:M 
-%                    if j ~= i
-%                        if j ==u
-%                            He = He + real(H(i,:) * p * H(i,:)'); 
-%                        else
-%                         He = He + real(H(i,:) * Fbb(:, (j-1)*M+1:j*M) * H(i,:)');
-%                        end
-%                    end
-%                  % abs(p(i,j))<=2;           
-%                 end
-%                 if i==u
-%                     real(H(i,:) * p * H(i,:)') + (1-2^ri)*(He + sigma) >= 0;
-%                 elseif i ~= u
-%                     real(H(i,:) * Fbb(:, (i-1)*m_k+1:i*m_k) *H(i,:)') + (1-2^ri)*(He + sigma) >= 0;
-%                 end
-%            end 
-% end
+    all<=M;
+ %norm(Frf*p*Frf')<=1;
+%     if u <=m_k
+%   norm(Frf(:,1:m_k)*p*Frf(:,1:m_k)')<=1;
+%    elseif u>m_k
+%    norm(Frf(:,m_k+1:end)*p*Frf(:,m_k+1:end)')<=1;
+%    end
+ if t_old>=2*ri
+            for i = u
+                He = 0;
+                for k = 1:K
+                for j = (k-1)*m_k+1:k*m_k
+                   if j ~= i
+                       if j ==u
+                           He = He + real(H(i,:) * p * H(i,:)'); 
+                       else
+                        He = He + real(H(i,1+(k-1)*m_k : k*m_k) * Fbb(:, (j-1)*m_k+1:j*m_k) * H(i,1+(k-1)*m_k : k*m_k)');
+                       end
+                   end
+                 % abs(p(i,j))<=2;           
+                end
+                if i==u
+                    real(H(i,1+(k-1)*m_k : k*m_k) * p * H(i,1+(k-1)*m_k : k*m_k)') + (1-2^ri)*(He + sigma) >= 0;
+                elseif i ~= u
+                    real(H(i,1+(k-1)*m_k : k*m_k) * Fbb(:, (i-1)*m_k+1:i*m_k) *H(i,1+(k-1)*m_k : k*m_k)') + (1-2^ri)*(He + sigma) >= 0;
+                end
+                end 
+            end
+end
 cvx_end  
 
     p_initial = p;

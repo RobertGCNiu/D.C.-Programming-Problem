@@ -81,7 +81,7 @@ f_p = 0;
      f_p  = f_p +  log(sigma + H_f)/log(2);   % f(p)
      g_p  = g_p +  log(sigma + H_g)/log(2);  % g(p)
  end
-    gra_g = g(H, Fbb,u,sigma);   % gradient of g
+    gra_g = g(H, Fbb,u,sigma,M);   % gradient of g
     t= -f_p +( g_p + real(trace(gra_g'*(p_0-p_initial))));
     minimize(t)
     subject to
@@ -141,7 +141,7 @@ variable e_k
      f_p  = f_p +  log(sigma + H_f)/log(2);   % f(p)
      g_p  = g_p +  log(sigma + H_g)/log(2);  % g(p)
  end
-    gra_g = g(H, Fbb,u,sigma);   % gradient of g
+    gra_g = g(H, Fbb,u,sigma,M);   % gradient of g
     t= -f_p + g_p + real(trace(gra_g'*(p-p_initial))) +  w_k*e_k;
     minimize(t)
     subject to

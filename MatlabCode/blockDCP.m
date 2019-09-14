@@ -81,7 +81,7 @@ f_p = 0;
      f_p  = f_p +  log(sigma + H_f)/log(2);   % f(p)  
      g_p  = g_p +  log(sigma + H_g)/log(2);  % g(p)   
  end
-    gra_g = g(H, Fbb,u,sigma,M);   % gradient of g
+    gra_g = g_block(H, Fbb,u,sigma,M,K);   % gradient of g
     t= f_p - g_p- real(trace(gra_g'*(p-p_initial)));
     maximize(t)
     subject to

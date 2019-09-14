@@ -70,7 +70,8 @@ b = rand(M,1);
  for u = 1:M
      %Fbb_t(:, (u-1)*M+1:u*M) = p_initial_v*p_initial_v'/1000;
      %Fbb_i(:, (u-1)*M+1:u*M)  =p_opt(:,u)*p_opt(:,u)';% a*a'+1j*(b*b');
-     Fbb(:, (u-1)*M+1:u*M)  = a*a' + 1j*(b*b'); 
+     Fbb_unnormal = a*a' + 1j*(b*b'); 
+      Fbb(:, (u-1)*M+1:u*M) = Fbb_unnormal/norm(Frf*Fbb_unnormal*Frf');
  end
  
 
@@ -112,14 +113,14 @@ variable p(M,M) hermitian
     maximize(t)
     subject to
     p>=0;      
-%     for i = 1:M
-%         if i == u
-%         all = all + norm(Frf*p*Frf');
-%         else 
-%             all = all + norm(Frf*Fbb(:, (i-1)*M+1:i*M)*Frf');
-%         end
-%     end
-%     all<=M;
+    for i = 1:M
+        if i == u
+        all = all + norm(Frf*p*Frf');
+        else 
+            all = all + norm(Frf*Fbb(:, (i-1)*M+1:i*M)*Frf');
+        end
+    end
+    all<=M;
  norm(Frf*p*Frf')<=1;
  %if t_old>=2*ri
 %             for i = u
