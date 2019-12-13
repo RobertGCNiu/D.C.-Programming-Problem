@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  13 SEP 2019 12:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  8 OCT 2019 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./DCPrecoding.tex
-(./DCPrecoding.tex
+**./DCPrecoding_V2.tex
+(./DCPrecoding_V2.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (c:/texlive/2017/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
@@ -326,8 +326,8 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen145
 \Gm@dimlist=\toks31
 )
-(./DCPrecoding.aux)
-\openout1 = `DCPrecoding.aux'.
+(./DCPrecoding_V2.aux)
+\openout1 = `DCPrecoding_V2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
@@ -474,14 +474,14 @@ e
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: twoside 
-* h-part:(L,W,R)=(43.36243pt, 527.57014pt, 43.36243pt)
+* h-part:(L,W,R)=(54.2025pt, 507.33571pt, 52.75679pt)
 * v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=527.57014pt
+* \textwidth=507.33571pt
 * \textheight=686.56499pt
-* \oddsidemargin=-28.90756pt
-* \evensidemargin=-28.90756pt
+* \oddsidemargin=-18.06749pt
+* \evensidemargin=-19.5132pt
 * \topmargin=-51.40948pt
 * \headheight=12.0pt
 * \headsep=21.342pt
@@ -510,105 +510,120 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 34.
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 37.
+Underfull \hbox (badness 1383) in paragraph at lines 36--38
+[]\OT1/ptm/b/it/9 Abstract\OT1/ptm/b/n/9 ---Hybrid ana-log and dig-i-tal pre-co
+d-ing has re-
+ []
+
+<Figure/SystemSchematic_new.pdf, id=1, 604.99426pt x 356.51292pt>
+File: Figure/SystemSchematic_new.pdf Graphic file (type pdf)
+
+<use Figure/SystemSchematic_new.pdf>
+Package pdftex.def Info: Figure/SystemSchematic_new.pdf used on input line 61.
+(pdftex.def)             Requested size: 362.99936pt x 213.90941pt.
  [1
 Non-PDF special ignored!{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdft
 ex.map}
 
 
-]
-Package epstopdf Info: Source file: <Figure/SystemSchematic_new.eps>
-(epstopdf)                    date: 2019-06-09 12:54:18
-(epstopdf)                    size: 350367 bytes
-(epstopdf)             Output file: <Figure/SystemSchematic_new-eps-converted-t
-o.pdf>
-(epstopdf)                    date: 2019-06-09 12:55:50
-(epstopdf)                    size: 69038 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/SystemSchematic_new
--eps-converted-to.pdf Figure/SystemSchematic_new.eps>
-(epstopdf)             \includegraphics on input line 82.
+] [2 <./Figure/SystemSchematic_new.pdf, page is rotated 90 degrees>]
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 189.
+
+[3] [4]
+Underfull \hbox (badness 3098) in paragraph at lines 313--313
+[]\OT1/ptm/b/n/10 Algorithm 1 \OT1/ptm/m/n/10 Pro-posed It-er-a-tive Al-go-rith
+m for Rank-
+ []
+
+
+Underfull \hbox (badness 5446) in paragraph at lines 320--322
+[] []\OT1/ptm/m/n/10 The ini-tial-iza-tion value by solv-ing Equa-tion []:
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
+Package epstopdf Info: Source file: <Figure/comparison.eps>
+(epstopdf)                    date: 2019-10-05 21:34:37
+(epstopdf)                    size: 23432 bytes
+(epstopdf)             Output file: <Figure/comparison-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-10-05 21:34:47
+(epstopdf)                    size: 9156 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/comparison-eps-conv
+erted-to.pdf Figure/comparison.eps>
+(epstopdf)             \includegraphics on input line 365.
 Package epstopdf Info: Output file is already uptodate.
+ <Figure/comparison-eps-converted-to.pdf, id=94, 408.52625pt x 325.215pt>
+File: Figure/comparison-eps-converted-to.pdf Graphic file (type pdf)
 
-<Figure/SystemSchematic_new-eps-converted-to.pdf, id=15, 606.265pt x 357.335pt>
-File: Figure/SystemSchematic_new-eps-converted-to.pdf Graphic file (type pdf)
-<use Figure/SystemSchematic_new-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/SystemSchematic_new-eps-converted-to.pdf used o
-n input line 82.
-(pdftex.def)             Requested size: 363.76181pt x 214.40265pt.
- [2] [3 <./Figure/SystemSchematic_new-eps-converted-to.pdf>] [4] [5]
-Package epstopdf Info: Source file: <Figure/ZF_VS_DC.eps>
-(epstopdf)                    date: 2019-06-13 15:30:26
-(epstopdf)                    size: 26750 bytes
-(epstopdf)             Output file: <Figure/ZF_VS_DC-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-13 15:30:30
-(epstopdf)                    size: 9732 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/ZF_VS_DC-eps-conver
-ted-to.pdf Figure/ZF_VS_DC.eps>
-(epstopdf)             \includegraphics on input line 348.
+<use Figure/comparison-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/comparison-eps-converted-to.pdf used on input l
+ine 365.
+(pdftex.def)             Requested size: 253.28366pt x 201.63121pt.
+
+Overfull \hbox (5.61581pt too wide) in paragraph at lines 365--366
+ [] 
+ []
+
+Package epstopdf Info: Source file: <Figure/cdf12users.eps>
+(epstopdf)                    date: 2019-10-05 21:22:10
+(epstopdf)                    size: 141527 bytes
+(epstopdf)             Output file: <Figure/cdf12users-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-10-05 21:22:15
+(epstopdf)                    size: 33903 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/cdf12users-eps-conv
+erted-to.pdf Figure/cdf12users.eps>
+(epstopdf)             \includegraphics on input line 373.
 Package epstopdf Info: Output file is already uptodate.
+<Figure/cdf12users-eps-converted-to.pdf, id=95, 408.52625pt x 325.215pt>
+File: Figure/cdf12users-eps-converted-to.pdf Graphic file (type pdf)
 
-<Figure/ZF_VS_DC-eps-converted-to.pdf, id=82, 394.47375pt x 324.21124pt>
-File: Figure/ZF_VS_DC-eps-converted-to.pdf Graphic file (type pdf)
+<use Figure/cdf12users-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/cdf12users-eps-converted-to.pdf used on input l
+ine 373.
+(pdftex.def)             Requested size: 253.28366pt x 201.63121pt.
 
-<use Figure/ZF_VS_DC-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/ZF_VS_DC-eps-converted-to.pdf used on input lin
-e 348.
-(pdftex.def)             Requested size: 252.94499pt x 207.89024pt.
-Package epstopdf Info: Source file: <Figure/convergence.eps>
-(epstopdf)                    date: 2019-06-13 14:44:15
-(epstopdf)                    size: 19687 bytes
-(epstopdf)             Output file: <Figure/convergence-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-13 14:44:21
-(epstopdf)                    size: 7474 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/convergence-eps-con
-verted-to.pdf Figure/convergence.eps>
-(epstopdf)             \includegraphics on input line 357.
-Package epstopdf Info: Output file is already uptodate.
+Overfull \hbox (5.61581pt too wide) in paragraph at lines 373--374
+ [] 
+ []
 
-<Figure/convergence-eps-converted-to.pdf, id=83, 394.47375pt x 324.21124pt>
-File: Figure/convergence-eps-converted-to.pdf Graphic file (type pdf)
-
-<use Figure/convergence-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/convergence-eps-converted-to.pdf used on input 
-line 357.
-(pdftex.def)             Requested size: 252.94499pt x 207.89024pt.
- (./DCPrecoding.bbl) [6 <./Figure/ZF_VS_DC-eps-converted-to.pdf> <./Figure/conv
-ergence-eps-converted-to.pdf>]
-(./DCPrecoding.aux) ) 
+(./DCPrecoding_V2.bbl) [6 <./Figure/comparison-eps-converted-to.pdf> <./Figure/
+cdf12users-eps-converted-to.pdf>] (./DCPrecoding_V2.aux) ) 
 Here is how much of TeX's memory you used:
- 5617 strings out of 492995
- 78624 string characters out of 6136402
- 172438 words of memory out of 5000000
- 9042 multiletter control sequences out of 15000+600000
- 52410 words of font info for 126 fonts, out of 8000000 for 9000
+ 5600 strings out of 492995
+ 78456 string characters out of 6136402
+ 175381 words of memory out of 5000000
+ 9032 multiletter control sequences out of 15000+600000
+ 49425 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,15n,29p,1680b,602s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c
-:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texliv
-e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi6.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pf
-b><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/te
-xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texliv
-e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2017/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr9.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/
-texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/20
-17/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2017/t
-exmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/ty
-pe1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utm
-r8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on DCPrecoding.pdf (6 pages, 314925 bytes).
+ 39i,15n,29p,1371b,602s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2017/texm
+f-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+<c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texliv
+e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2017/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2017/texmf-dist/
+fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/2017/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/t
+exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/201
+7/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2017/texmf-dist/f
+onts/type1/urw/times/utmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/tim
+es/utmbi8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:
+/texlive/2017/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on DCPrecoding_V2.pdf (6 pages, 367429 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 119 compressed objects within 2 object streams
+ 174 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

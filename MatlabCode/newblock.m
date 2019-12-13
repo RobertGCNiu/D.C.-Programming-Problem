@@ -22,7 +22,7 @@ t_all = [];
 % a_RX =data.a_RX;
 % H_c = data.H_c;
 %Fbb_v = data.Fbb;
-at_num =8;
+at_num =4;
 rt_num =2;
 R_dc = [];
 for iter_realization = 1:ITER
@@ -88,12 +88,12 @@ r_p_opt_all =[r_p_opt_all R_opt_i];
 
 a = ones(m_k,1);
 b = rand(m_k,1);
-p_initial_v = a + 1j*b;  
+p_initial_v = a;%+ 1j*b;  
 p_initial_v = p_initial_v/sqrt(p_initial_v'*(Frf(:,1:m_k)'*Frf(:,1:m_k))*p_initial_v);
  for u = 1:M
      %Fbb_t(:, (u-1)*M+1:u*M) = p_initial_v*p_initial_v'/1000;
      %Fbb_i(:, (u-1)*M+1:u*M)  =p_opt(:,u)*p_opt(:,u)';% a*a'+1j*(b*b');
-     Fbb(:, (u-1)*m_k+1:u*m_k)  =(a*a'+1j*(b*b'))/10; 
+     Fbb(:, (u-1)*m_k+1:u*m_k)  =(a*a')/10; 
  end
  
 
@@ -110,7 +110,7 @@ while(abs(max_value_dif)>0.1)
 
 cvx_begin sdp quiet 
 cvx_precision best
-variable p(m_k,m_k) hermitian
+variable p(m_k,m_k) symmetric
  f_p = 0;
  g_p = 0;
  for i = 1 : M
@@ -192,10 +192,10 @@ cvx_end
     t_old = t
     t_all = [t_all t];
     cvx_status;
-     if t > R_opt_i
-         max_value_dif = 0;
-         conver=0;
-     end
+%      if t > R_opt_i
+%          max_value_dif = 0;
+%          conver=0;
+%      end
 end
 
 u

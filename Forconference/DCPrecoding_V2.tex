@@ -24,17 +24,17 @@
 
 \begin{document}
 
-\title{Joint Digital Precoding and Power Allocation for QoS-Aware Weighted Sum-Rate Maximization in mmWave Hybrid Beamforming Systems}
+\title{Joint Precoding and Power Allocation for Hybrid Precoding Systems via Rank-Constrained D.C. Programming}
 \author{\IEEEauthorblockN{Guanchong Niu, Qi Cao, Man-On Pun\IEEEauthorrefmark{3}\\
 		\IEEEauthorblockA{Shool of Science and Engineering,\\
 			The Chinese University of Hong Kong, Shenzhen\\
 			Guangdong, China, 518172
-			\thanks{This work was supported, in part, by the CUHKSZ President's Fund under Grant No. PF.01.000211, the Shenzhen Science and Technology Innovation Committee under Grant No. ZDSYS20170725140921348 and the National Natural Science Foundation of China under Grant No. 61731018.} \thanks{\IEEEauthorrefmark{3} Corresponding author, email: SimonPun@cuhk.edu.cn.}
+			\thanks{This work was supported, in part, by the Shenzhen Science and Technology Innovation Committee under Grant No. ZDSYS20170725140921348, the Robotic Discipline Development Fund (2016-1418) from the Shenzhen Government and the National Natural Science Foundation of China under Grant No. 61731018.} \thanks{\IEEEauthorrefmark{3} Corresponding author, email: SimonPun@cuhk.edu.cn.}
 }}}
 \maketitle\thispagestyle{plain}\pagestyle{plain}
 
 \begin{abstract}
-Beam Division Multiple Access (BDMA) with hybrid precoding has recently been proposed for multiuser multiple-input multiple-output (MU-MIMO) systems by simultaneously transmitting multiple digitally precoded users' data streams via different beams. In the hybrid precoding system, the analog and digital precoder design as well as the power allocation problem are highly non-convex. In this paper, we first design the analog precoder in BDMA transmission systems. After obtaining the analog precoder, the non-convex problem can be reformulated as an iterative rank-constrained D.C. (difference of two convex functions) programming problem by setting a dummy variable. In contrast to the conventional approximation algorithms like zero-forcing or D.C. algorithms, the proposed algorithm directly maximizes the weighted sum-rate (WSR) $\tau_u\log_2(1+\text{SINR}_u)$ of $u$-th user by jointly optimizing the digital precoder and power allocation. Furthermore, the iterative algorithm is proved to be monotonic and convergent. The simulation results confirm the effectiveness of the proposed iterative algorithm.
+Hybrid analog and digital precoding has recently been proposed for massive multiple-input multiple-output (MIMO) systems. However, it is challenging to optimize the design of precoding and power allocation as the optimization problem is highly non-convex. In this work, the non-convex problem is cast into the D.C. (difference of two convex functions) programming framework. To cope with the high dimensionality of the problem, an iterative rank-constrained D.C. programming technique is developed. As a result, the proposed algorithm is capable of directly maximizing the weighted sum-rate (WSR) of each user to take in account the quality of service (QoS) requirement. Furthermore, the monotonic convergence behavior of the proposed iterative algorithm is proved. Finally, simulation results confirm the effectiveness of the proposed iterative algorithm.
 \end{abstract}
 
 %\begin{keywords}
@@ -42,7 +42,7 @@ Beam Division Multiple Access (BDMA) with hybrid precoding has recently been pro
 %\end{keywords}
 
 \begin{IEEEkeywords}
-	BDMA, Hybrid Beamforming, D.C. Programming, Power Allocation.
+	Massive MIMO, Hybrid Beamforming, D.C. Programming, Power Allocation.
 \end{IEEEkeywords}
 
 %\titlepgskip=-15pt
@@ -52,12 +52,9 @@ Beam Division Multiple Access (BDMA) with hybrid precoding has recently been pro
 \section{Introduction}\label{sec:introduction}
 To meet the ever-increasing demand for higher user data rates, it is envisioned that the next-generation cellular systems will be equipped with massive antenna arrays \cite{molisch2005capacity}. Capitalizing on a large number of antennas at the base station (BS), BDMA was first proposed to decompose the multiuser multiple-input multiple-output (MU-MIMO) system into multiple single-user MIMO channels by multiplexing multiple users' data onto non-overlapping beams in \cite{sun2015beam}. BDMA is particularly attractive in practice as beamforming is commonly implemented in the analog domain using low-cost phase shifters. Meanwhile, to eliminate the multiuser interference while avoiding the unaffordable hardware cost and power consumption of full digital beamforming, hybrid digital and analog beamforming has been proposed for massive MIMO transmissions by dividing the precoding process into two steps, namely analog and digital precoding \cite{alkhateeb2014channel}. More specifically, the transmitted signals are first precoded digitally using a smaller number of RF chains followed by the analog precoding implemented with a much larger number of low-cost phase shifters. As a result, the hybrid analog-digital precoding architecture requires significantly less RF chains as compared to the fully digital precoding.
 
-Despite the advantages for hybrid beamforming structure, the analog and digital precoders are intractable to be designed in closed-form since its non-convexity and computational complexity.
-Besides, power allocation is also an important problem in co-channel interference management for the multiuser wireless network. To maximize the weighted sum-rate (WSR) in hybrid beamforming systems, the problem is usually highly non-convex, especially for the coupled hybrid precoding and power constraints. Therefore, most of the existing works separate the precoding and power allocation problem to two isolated problems. For instance, \cite{sohrabi2016hybrid} alternatively optimizes the power allocation for sum-rate capacity maximization problem implementing water filling by assuming the analog precoders are strictly orthogonal among distinct users. For single antenna transceivers, the difference of two convex functions (D.C.) programming algorithm is presented to maximize WSR by finding the optimal power allocation in \cite{kha2012fast}.
+Despite its many advantages, the analog and digital beamforming requires highly computational design of the analog and digital precoding vectors. In addition, power allocation design plays an important role in managing co-channel interference in multiuser (MU) networks. However, joint precoding and power allocation design is usually highly non-convex as these precoding and power constraints are coupled. To the authors' best knowledge, no closed-form solutions to the joint precoding and power allocation design have been reported in the literature. Instead, most existing works separate the precoding and power allocation problem to two isolated problems. For instance, \cite{sohrabi2016hybrid} alternatively optimizes the power allocation for the sum-rate capacity maximization problem implementing water filling by assuming the analog precoders are strictly orthogonal among distinct users. For single antenna transceivers, the difference of two convex functions (D.C.) programming algorithm is presented to maximize the weighted sum-rate (WSR) by finding the optimal power allocation in \cite{kha2012fast}. It is worth noting that most exiting works approximate the sum-rate maximization problem with an interference minimization (e.g. zero-forcing) problem.
 
-Furthermore, in many MIMO applications, it is desirable to design a system satisfying the quality of service (QoS) constraint for each user by adjusting the power on different channels \cite{palomar2004optimum}. Recently, as the extension of  signal-to-interference ratio (SIR) balancing for multiuser code division multiple access (CDMA) system \cite{xie2017sinr},  signal-to-interference-and-noise ratio (SINR)- balancing is proposed to simplify the QoS-aware problem by allocating power on each data stream. This optimization problem satisfies the QoS requirement because at the optimum all the weighted SINRs are equal. However,  balancing SINR approach implies the system performances are limited by the worst user causing a reduction of the overall sum-rate capacity. 
-
-Finally, it is worth noting that most of the exiting works approximate the sum-rate maximization problem as an interference minimization (zero-forcing) or SINR maximization problem.
+Finally, for multi-user wireless networks, it is highly desirable to design a system that satisfies the quality of service (QoS) constraint for each user. In the literature, such QoS requirements are commonly met by adjusting the power allocated to different users in the system \cite{palomar2004optimum}. For instance, the signal-to-interference ratio (SIR) or signal-to-interference-and-noise ratio (SINR)-balancing schemes are proposed for multiuser code division multiple access (CDMA) systems by allocating power on each data stream.\cite{xie2017sinr}. The resulting system satisfies the QoS requirement as all users have the same SIR/SINR value. However,  such balanced SIR/SINR approaches imply that the system performances is limited by the worst user, which incurs performance degradation in terms of overall system sum-rate capacity.
 
 \begin{figure*}[ht]
 	\begin{center}
@@ -67,15 +64,15 @@ Finally, it is worth noting that most of the exiting works approximate the sum-r
 \end{figure*}
 
 
-Motivated by addressing the challenges, the main contributions of this paper are summarized as follows:
+Motivated by the aforementioned challenges, this work develops joint precoding and power allocation for hybrid precoding systems using the rank-constrained D.C. programming. The main contributions of this work are summarized as follows:
 
 \begin{itemize}[leftmargin=*]
 		
-\item In sharp contrast to the conventional optimization algorithms that separate the precoding and power allocation problems independently, a rank-constrained D.C. problem is presented to jointly optimize the digital precoder and power in this paper. 
+\item In sharp contrast to the conventional optimization algorithms that separate the precoding and power allocation problems independently, a rank-constrained D.C. problem is presented to jointly optimize the digital precoder and power allocation to different data streams;
 
-\item To solve the general rank-constrained D.C. problems, an iterative algorithm is proposed to formulate the objective function  as a standard convex optimization problem in each iteration. The convergence of the proposed algorithm is also proved. 
+\item To solve the general rank-constrained D.C. problems, an iterative algorithm is proposed to formulate the objective function as a standard convex optimization problem in each iteration. The convergence of the proposed algorithm is proved.
 
-\item To address the widely-known disadvantages of zero-forcing and SINR-balancing algorithms in WSR maximization, the proposed iterative approach can maximize the WSR with QoS constraint for each user by jointly optimizing the digital precoder and power allocation. The simulation results show the effectiveness of our proposed algorithm.
+\item Finally, we apply the newly established iterative ank-constrained D.C. programming technique to maximize the WSR with QoS constraints for each user by jointly optimizing the precoder design and power allocation. Simulation results are shown to demonstrate the effectiveness of the proposed algorithm.
 
 \end{itemize}
 
@@ -134,7 +131,7 @@ where $L_u$ is the number of scatters of the $u$-th user's channel. Furthermore,
 \bm{a}(\phi,\theta) =&\frac{1}{\sqrt{WQ}}\left[1,  e^{j\kappa d(\sin\phi \sin\theta +\cos\theta)},   \right. &&\nonumber\\
 &\left. \cdots, e^{j\kappa d\left((P-1)\sin\phi \sin\theta +(Q-1)\cos\theta\right)}\right]^T,&&
 \end{flalign}
-where $\kappa =\frac{2\pi}{\lambda}$ is the wavenumber and $d$ is the distance between two adjacent antennas. 
+where $\kappa =\frac{2\pi}{\lambda}$ is the wavenumber and $d$ is the distance between two adjacent antennas.
 
 
 \subsection{Problem Formulation}
@@ -156,7 +153,7 @@ where $\bm{\tau} = \left[\tau_1, \tau_2, \cdots, \tau_{_{N_U}}\right]$ with $\su
 
 Finally, the optimal design of the digital and analog precoding matrices as well as power allocation can be formulated as
 \begin{align}\label{eq:maxsumrate}
-\mathcal{P}_1: \quad&\underset{\bm W, \bm{V},\bm F}{\text{maximize}}\quad R_{tot}(\bm{p},\bm{W}, \bm{V}, \bm{F})\\ 
+\mathcal{P}_1: \quad&\underset{\bm W, \bm{V},\bm F}{\text{maximize}}\quad R_{tot}(\bm{p},\bm{W}, \bm{V}, \bm{F})\\
 \text{subject to} \quad&C_1: | [\bm{v}_{u}]_i |^2=1/N_T,\quad 0<i\leq N_T; \nonumber\\
 &C_2: |[\bm{w}_{u}]_j|^2=1/N_R, \quad  0<j \leq N_R;\nonumber\\
 &C_3: \|\bm{V} \bm{f}_u\|^2 = 1, \quad 0<u<N_U;\nonumber\\
@@ -165,11 +162,11 @@ Finally, the optimal design of the digital and analog precoding matrices as well
 \end{align}
 where $C_1$ and $C_2$ are the analog constraints for receiver and transmitter. $C_3$ ensures that each RF chain is of unit power. The total transmitter power is constrained by $P$ as shown in $C_4$. Finally, $C_5$ ensures that the $u$-th user's capacity should be guaranteed not less than a certain threshold $\lambda_{u}$.
 
-The problem $\mathcal{P}_1$ is highly non-convex and intractable to derive a closed-form solution. In this paper, we first design the analog precoder to relax the phase constraints. Then, a general rank-constrained D.C. programming algorithm is proposed to derive the optimal digital precoder and power allocation while formulating the problem in each iteration as a standard convex optimization problem. 
+Since the problem $\mathcal{P}_1$ is highly non-convex, it is analytically intractable to derive a closed-form solution to $\mathcal{P}_1$. In this paper, we first design the analog precoder to relax the phase constraints. After that, a general rank-constrained D.C. programming technique is proposed to derive the optimal digital precoder and power allocation by transforming the problem in each iteration as a standard convex optimization problem.
 
 \section{Analog Beamforming Design}\label{analog}
 
-Since the inherent NP-hard of the problem $\mathcal{P}_1$,  we assume the digital precoder is $\bm{f}_u\bm{f}_u^H = \bm{I}_{N_U}$ with uniform power allocation for BDMA transmissions in this section. We begin with the analog beamforming design for both transmitter and receiver. It is well-known that distinct array response vectors are asymptotically orthogonal as the number of antennas in an antenna array goes to infinity \cite{sun2015beam}, {\em i.e.}
+We begin with the analog beamforming design for both transmitter and receiver. It is well-known that distinct array response vectors are asymptotically orthogonal as the number of antennas in an antenna array goes to infinity \cite{sun2015beam}, {\em i.e.}
 \begin{equation}\label{Eq:assumption}
 \lim_{N\rightarrow +\infty} \bm{a}^{H}(\phi^t_{k,u},\theta^t_{k,u}) \cdot\bm{a}(\phi^t_{\ell,v},\theta^t_{\ell,v})=\delta(k-\ell)\delta(u-v).
 \end{equation}
@@ -188,10 +185,11 @@ where the array response vectors in transmitter and receiver are denoted by
 \end{align}
 
 Furthermore, $\text{SINR}\left(\tilde{\bm w}_{u}, \tilde{\bm v}_{u}\right)$ is given by
-\begin{equation}\label{SINR} 
+\begin{equation}\label{SINR}
 \text{SINR}_u\left(\tilde{\bm w}_{u}, \tilde{\bm v}_{u}\right) = \frac{|\tilde{\bm w}^H_{u} \bm{H}_{u} \tilde{\bm v}_{u}|^2}{\displaystyle\sum_{i=1,i\neq u}^{N_U}|\tilde{\bm w}^H_{u} \bm{H}_{u}\tilde{\bm {v}}_i|^2 + {1 \over \gamma} },
 \end{equation}
-where $\gamma = \frac{P}{N_{_U}\sigma_{u}^2}$ is the uniform SNR for each user. 
+where $\gamma = \frac{P}{N_{_U}\sigma_{u}^2}$ is the uniform SNR for each user and we have assumed that $\bm{f}_u\bm{f}_u^H = \bm{I}_{N_U}$. {\bf Simon: Why?}
+
 
 The optimal analog precoder can be straightforwardly found by  exhaustively searching in the feasible sets of $\mathcal{A}^T_{k,u}$ and $\mathcal{A}^R_{k,u}$.
 
@@ -202,23 +200,23 @@ The optimal analog precoder can be straightforwardly found by  exhaustively sear
 %\bm{w}^H_{k,u,l}=\bm{a}_{R}^{H}(\phi^r_{k,u,l},\theta^r_{k,u,l}).\\
 %\label{eq:wku}
 %\end{equation}
+
 \section{Proposed rank-constrained d.c.  problem}\label{analogAndDigital}
 
-As the analog precoder is given, we will derive an optimization problem to jointly find the optimal digital precoder and power allocation in this section. 
-Recalling the problem $\mathcal{P}_1$, the function of $R_{tot}(\bm{F}, \bm{p})$ is still non-convex.  To settle this challenge, we form the digital precoder as
+For given analog precoders, we will derive the optimal digital precoder and power allocation in this section. Recalling the problem $\mathcal{P}_1$, the function of $R_{tot}(\bm{F}, \bm{p})$ is still non-convex.  To settle this challenge, we form the digital precoder as
 \begin{equation}
 \bar{\bm{F}}_{u} = p_u\bm{f}_{u} \bm{f}_{u}^H,
 \end{equation}
 with constraints $\textbf{rank}(\bar{\bm{F}}_{u})\leq 1$ and $\bar{\bm{F}}_{u} \succeq \bm{0}$. Denote by $\bm{\mathcal{F}} = [\bar{\bm{F}}^{(n)}_1, \bar{\bm{F}}^{(n)}_2,\cdots, \bar{\bm{F}}^{(n)}_{N_U}]$.
 
- Furthermore, the constraints $C_3$ and $C_4$ in $\mathcal{P}_1$ can be transformed as 
+ Furthermore, the constraints $C_3$ and $C_4$ in $\mathcal{P}_1$ can be transformed as
 \begin{equation}
  \sum_{u=1}^{N_U} p_u\|\bm{V} \bm{f}_{u}\|^2 = \sum_{u=1}^{N_U}\bm{V} \bar{\bm{F}}_u\bm{V} ^H \leq P.
 \end{equation}
- 
+
 It is worth noting that the optimal digital precoder $\bm{f}_{u}^*$ is the eigenvector corresponding to the only one non-zero eigenvalue $p^*_u$ of optimal $\bar{\bm{F}}_u^*$, where $p^*_u$ is the optimal power allocation.
 
-Then the Equation \eqref{eq:6} can be rewritten as 
+Then the Equation \eqref{eq:6} can be rewritten as
 \begin{align}\label{eq:newR}
 R_u(\bar{\bm{F}}_u) =& \log_2\left(1+\frac{\bm{g}_{u}^H \bar{\bm{F}}_u\bm{g}_{u}}{\sum_{\substack{i=1 \\ i\neq u}}^{N_U}{\bm{g}}_{u}^H\bar{\bm{F}}_i\bm{g}_u+\sigma_u^2}\right)\nonumber\\
 =&\log_2\left(\sum_{i=1}^{N_U}\bm{g}_{u}^H \bar{\bm{F}}_i\bm{g}_{u} + \sigma_u^2\right) \nonumber\\
@@ -241,8 +239,8 @@ where
 It is worth noting that the QoS constraint $C_2$ can be straightforwardly reformulated as a convex constraint by the following transformation:
 \begin{equation}
 	\bm{g}_{u}^H \bar{\bm{F}}_u\bm{g}_{u} + (1-2^{\lambda_{u}}) \left( \sum_{\substack{i=1 \\ i\neq u}}^{N_U} \bm{g}_{u}^H \bar{\bm{F}}_i\bm{g}_{u} + \sigma_u^2 \right) \geq 0.
-\end{equation} 
-Finally, a standard D.C programming problem is derived after dropping $C_4$. Next, the iterative algorithm will be given to solve the problem $\mathcal{P}_2$ by ignoring $C_4$ constraint. 
+\end{equation}
+Finally, a standard D.C programming problem is derived after dropping $C_4$. Next, the iterative algorithm will be given to solve the problem $\mathcal{P}_2$ by ignoring $C_4$ constraint.
 
 Since the problem $\mathcal{P}_2$ still has high computational complexity, the optimal $\bm{\mathcal{F}}^*$ can be obtained by iteratively solving $\bar{\bm{F}}_u$ for $u = 1,2,\cdots, N_U$ until no improvement for next iteration as detailed in next section.
 
@@ -251,7 +249,7 @@ Similar to the procedures in \cite{kha2012fast}, the iterative algorithm gives t
 \underset{\bar{\bm{F}}_u}{\text{maximize}}&\quad f(\bar{\bm{F}}_u) - g(\bar{\bm{F}}^{(n)}_u) - \langle \bigtriangledown g(\bar{\bm{F}}^{(n)}_u), \bar{\bm{F}}_u -  \bar{\bm{F}}_u^{(n)} \rangle\\ \nonumber
 \text{subject to}& \quad C_1, C_2, C_3\quad \text{in} \quad \mathcal{P}_2,
 \end{align}
-where $\langle \cdot \rangle$ denotes the inner product of two matrices, \textit{i.e.} $\langle \bm{A}, \bm{B} \rangle = \textbf{trace}(\bm{A}^T \bm{B})$. The gradient of $g(\bar{\bm{F}}^{(n)})$ is easily given by 
+where $\langle \cdot \rangle$ denotes the inner product of two matrices, \textit{i.e.} $\langle \bm{A}, \bm{B} \rangle = \textbf{trace}(\bm{A}^T \bm{B})$. The gradient of $g(\bar{\bm{F}}^{(n)})$ is easily given by
 \begin{equation}
 	\bigtriangledown g(\bar{\bm{F}}^{(n)}_u) = \sum_{\substack{j=1 \\ j\neq u}}^{N_U}\frac{w_j/\ln 2}{\sum_{\substack{i=1 \\ i\neq j}}^{N_U} \bm{g}_{u}^H \bar{\bm{F}}_i\bm{g}_{u} +\sigma^2_j} \bm{g}_{j} \bm{g}_{j}^H.
 \end{equation}
@@ -289,7 +287,7 @@ and $\bm{U}^{(0)}$ is the eigenvectors corresponding to $n-r$ smallest eigenvalu
 
 \subsection{Iterative Algorithm for $\mathcal{P}_2$}
 As shown in Section \ref{analogAndDigital}, Equation \eqref{DC} is obviously a concave optimization problem.
-By combining the $\mathcal{P}_2$ and $\mathcal{P}_3$, an iterative algorithm for the rank-constrained D.C programming problem is derived. 
+By combining the $\mathcal{P}_2$ and $\mathcal{P}_3$, an iterative algorithm for the rank-constrained D.C programming problem is derived.
 The optimal $g(\bar{\bm{F}}^{(n+1)})$ in the $n$-th iteration is given by solving the following convex problem:
 \begin{align} \label{rankconstrainedDC}
 \underset{\bar{\bm{F}}_u, e^{(n+1)}}{\text{minimize}}  & \quad  t(\bar{\bm{F}}_u, e^{(n+1)}) \\
@@ -297,7 +295,7 @@ The optimal $g(\bar{\bm{F}}^{(n+1)})$ in the $n$-th iteration is given by solvin
 & \quad R_{u}\geq \lambda_{u}, u = 1,2,\cdots, N_U;\nonumber\\
 &\quad \bar{\bm{F}}_u \succeq \bm{0};\nonumber\\
 &\quad e^{(n+1)}\bm{I}_{N_U-1} - \bm{U}^{(n)H} \bar{\bm{F}}_u \bm{U}^{(n)} \succeq \bm{0};\nonumber\\
-&\quad e^{(n+1)} \leq e^{(n)},\nonumber 
+&\quad e^{(n+1)} \leq e^{(n)},\nonumber
 \end{align}
 where
 \begin{align}
@@ -316,12 +314,12 @@ The proposed iterative algorithm can be summarized as \textbf{Algorithm 1}. In e
 	\label{beam_cluster}
 	\begin{algorithmic}
 		\REQUIRE  \quad
-		\STATE Effective channel: $\bm{g}_{1},\bm{g}_{2},\cdots,\bm{g}_{_{N_U}}$; 
+		\STATE Effective channel: $\bm{g}_{1},\bm{g}_{2},\cdots,\bm{g}_{_{N_U}}$;
 		\STATE Random initialization matrices of $\bar{\bm{F}}_u^{(0)}$, $u = 1,2,\cdots, N_U$;
 		\STATE The initialization information: $s$, $s'$, $t^{(0)}$, $t^{(1)}$, $\epsilon$;
 		\STATE The initialization value by solving Equation \eqref{x0}: $\bm{U}^{(0)}, e^{(0)}$
 		%\STATE $\bm{\mathcal{I}} \leftarrow \mathcal{I}_1$ and ${\mathcal X}\setminus x^*$;
-		\ENSURE   
+		\ENSURE
 	\end{algorithmic}		
 	\begin{algorithmic}[1]
 		\WHILE{$|(s' - s)/s|\leq \epsilon$}
@@ -330,7 +328,7 @@ The proposed iterative algorithm can be summarized as \textbf{Algorithm 1}. In e
 		\STATE $n = 0$
 			\WHILE{$|(t(\bar{\bm{F}}^{(n+1)}_{u}) - t(\bar{\bm{F}}^{(n)}_{u})|\leq \epsilon$}
        	\STATE Obtain the optimal value $t^{(n+1)}$ of objective function and $\bar{\bm{F}}^{(n+1)}_u, e^{(n+1)}$ in Equation \eqref{rankconstrainedDC}
-       	\STATE Update $\bm{U}^{(n)}$ from $\bar{\bm{F}}^{(n+1)}_u$ via EVD 
+       	\STATE Update $\bm{U}^{(n)}$ from $\bar{\bm{F}}^{(n+1)}_u$ via EVD
        	\STATE Update $n = n+1$
        	\ENDWHILE
 		\ENDFOR
@@ -369,7 +367,7 @@ In Fig.~\ref{fig:comparison}, the wights are set to be $\tau_u = 1.1$, $u = 1,\c
 	\end{center}
 \end{figure}
 
-Fig.~\ref{fig:cdf} depicts the CDF of the user's data rate. It is evident that all users served by the QoS-aware power allocation algorithms satisfy the minimum QoS requirement (\textit{i.e.} $1$~bps/Hz). In contrast, the conventional zero-forcing algorithm with uniform power allocation suffers from an outage rate of about $20\%$ where the outage is defined as the user data rate being below the minimum required data rate.  
+Fig.~\ref{fig:cdf} depicts the CDF of the user's data rate. It is evident that all users served by the QoS-aware power allocation algorithms satisfy the minimum QoS requirement (\textit{i.e.} $1$~bps/Hz). In contrast, the conventional zero-forcing algorithm with uniform power allocation suffers from an outage rate of about $20\%$ where the outage is defined as the user data rate being below the minimum required data rate.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics[scale=0.62]{Figure/cdf12users.eps}
